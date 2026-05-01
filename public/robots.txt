@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://infycollegeerp.com/sitemap.xml
