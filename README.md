@@ -1,4 +1,4 @@
-# MyCollegeERP — Official Marketing Website
+# MyCollegeERP — Official Marketing Website (v2)
 
 Premium marketing website for **MyCollegeERP** — a multi-tenant ERP SaaS for Indian junior, intermediate, and +2 colleges.
 
@@ -8,171 +8,239 @@ Premium marketing website for **MyCollegeERP** — a multi-tenant ERP SaaS for I
 
 ---
 
+## What's New in v2
+
+| Upgrade | What you get |
+|---|---|
+| **Bigger, bolder typography** | Hero headlines now scale up to 6.75rem (108px) — fluid `clamp()` sizing for desktop / tablet / mobile. Section headings up to 3.75rem. |
+| **Animated counters** | Every stat number counts up from 0 as it scrolls into view (uses `requestAnimationFrame` + ease-out cubic). Visible in Hero, Live Stats, Dashboard, Floating accent cards. |
+| **Scroll-triggered reveals** | Every section fades up smoothly as the user scrolls (IntersectionObserver-based). Honors `prefers-reduced-motion`. |
+| **Live data showcase** | New **DashboardShowcase** section with 4 interactive tabs (Students / Fees / Exams / Audit Log) — each showing realistic Indian college sample data. |
+| **Comparison table** | New **Excel vs MyCollegeERP** side-by-side breakdown of 8 common workflows. |
+| **Logo marquee** | Infinite-scrolling strip of college names ("Trusted by colleges across India"). |
+| **Live Stats section** | Big animated counters with gradient accents — "12,500+ Students managed", "₹84+ Cr Fees collected", etc. |
+| **Floating UI elements** | Hero dashboard has floating "Fees today: +₹84,200" and "New admits: +12 this week" cards with subtle float animation. |
+| **Interactive Pricing** | Monthly / Annual billing toggle with "Save 17%" badge on annual. |
+| **Carousel Testimonials** | Auto-rotating every 6s, manual prev/next controls, animated dot indicator. |
+| **Background patterns** | Grid + dot patterns add depth without distraction. |
+
+---
+
 ## Tech Stack
 
 | Layer | Choice | Why |
 |---|---|---|
-| Framework | **Vite + React 18** | Fast dev, tiny bundle, static output |
+| Framework | **Vite 7+ + React 18** | Fast dev, tiny bundle, static output |
 | Styling | **Tailwind CSS 3** | Utility-first, consistent design tokens |
 | Icons | **Lucide React** | Lightweight, professional, tree-shakable |
 | Fonts | Playfair Display + DM Sans | Premium serif headings + clean sans body |
+| Animations | **CSS + IntersectionObserver** | No heavy JS animation lib — ~0KB cost |
 | Hosting | **Vercel** (recommended) | Static deploy, auto HTTPS, CDN, security headers |
-| Build | `vite build` → static `dist/` | Deployable to any CDN (Vercel, Netlify, Cloudflare Pages, S3) |
 
-**Why this stack?**
-- ⚡ Static HTML — no server attack surface
-- 🔒 Security headers via `vercel.json` (HSTS, X-Frame-Options, etc.)
-- 📦 ~150KB gzipped total bundle
-- 🚀 Lighthouse 95+ out of the box
-- 🎨 Pixel-perfect on mobile, tablet, desktop
+**Bundle size:** ~75 KB gzipped total (HTML + CSS + JS).
 
 ---
 
-## Project Structure
+## Project Structure (Section-wise)
 
 ```
 MyCollegeERP Official Site/
 ├── public/
-│   ├── brand-logo.png       ← Icon only (cap + M + book) — REPLACE
-│   ├── brand-full.png       ← Icon + "MyCollege ERP" text — REPLACE
-│   └── og-image.png         ← Full marketing version — REPLACE
+│   ├── brand-logo.svg         ← SVG fallback (replace with PNG anytime)
+│   ├── brand-full.svg         ← SVG fallback (replace with PNG anytime)
+│   ├── robots.txt
+│   └── sitemap.xml
 ├── src/
-│   ├── components/
-│   │   ├── Header.jsx       ← Sticky nav with logo + Sign in + Demo CTA
-│   │   ├── Hero.jsx         ← Headline + dashboard mockup
-│   │   ├── TrustStrip.jsx   ← 4 trust pillars
-│   │   ├── Problem.jsx      ← Pain points before MyCollegeERP
-│   │   ├── Solution.jsx     ← How MyCollegeERP solves it (uses brand-full.png)
-│   │   ├── Features.jsx     ← 9 module cards
-│   │   ├── HowItWorks.jsx   ← 3-step onboarding
-│   │   ├── Security.jsx     ← RLS, audit, OTP, exports (dark section)
-│   │   ├── Pricing.jsx      ← Basic / Pro / Enterprise tiers
-│   │   ├── Testimonials.jsx ← Indian college testimonials
-│   │   ├── FAQ.jsx          ← 8 common questions, accordion
-│   │   ├── FinalCTA.jsx     ← Demo + WhatsApp + contact card
-│   │   └── Footer.jsx       ← Links + contact + legal (uses brand-logo.png)
-│   ├── data/
-│   │   └── content.js       ← ALL TEXT CONTENT — edit copy here
-│   ├── App.jsx
+│   ├── App.jsx                ← Section composition (the main "table of contents")
 │   ├── main.jsx
-│   └── index.css            ← Tailwind layers + design system tokens
-├── index.html               ← SEO meta tags, OG tags, JSON-LD schema
-├── tailwind.config.js       ← Brand colors, fonts, shadows
+│   ├── index.css              ← Tailwind layers + animation keyframes
+│   │
+│   ├── components/
+│   │   ├── Logo.jsx           ← Smart PNG-first / SVG-fallback img wrapper
+│   │   │
+│   │   ├── layout/            ← Site chrome
+│   │   │   ├── Header.jsx     ← Sticky nav with scroll-aware blur
+│   │   │   └── Footer.jsx
+│   │   │
+│   │   ├── sections/          ← All page sections (one file each — section-wise)
+│   │   │   ├── Hero.jsx                ← Massive headline + animated dashboard mockup
+│   │   │   ├── LogoMarquee.jsx         ← Infinite scrolling college names
+│   │   │   ├── TrustStrip.jsx          ← 4 trust pillars
+│   │   │   ├── LiveStats.jsx           ← 4 big animated counters
+│   │   │   ├── Problem.jsx             ← Pain points cards
+│   │   │   ├── Solution.jsx            ← How MyCollegeERP solves it
+│   │   │   ├── Features.jsx            ← 9 module cards with hover effects
+│   │   │   ├── DashboardShowcase.jsx   ← 4-tab live data preview ⭐ NEW
+│   │   │   ├── HowItWorks.jsx          ← 3-step onboarding
+│   │   │   ├── ComparisonTable.jsx     ← Excel vs MyCollegeERP ⭐ NEW
+│   │   │   ├── Security.jsx            ← Dark section with 4 security pillars
+│   │   │   ├── Pricing.jsx             ← 3 tiers + monthly/annual toggle
+│   │   │   ├── Testimonials.jsx        ← Auto-rotating carousel
+│   │   │   ├── FAQ.jsx                 ← 8 questions, accordion
+│   │   │   └── FinalCTA.jsx            ← Demo + WhatsApp + contact card
+│   │   │
+│   │   └── ui/                ← Reusable UI primitives
+│   │       ├── Counter.jsx             ← Animated number that counts up on scroll
+│   │       ├── ScrollReveal.jsx        ← Fade-in wrapper (up/right/left/scale/fade)
+│   │       ├── Marquee.jsx             ← Infinite horizontal scroll
+│   │       └── SectionHeading.jsx      ← Standard tag → title → lead block
+│   │
+│   ├── hooks/
+│   │   ├── useInView.js                ← IntersectionObserver hook
+│   │   └── useCountUp.js               ← rAF-based number animation hook
+│   │
+│   └── data/
+│       ├── content.js                  ← Marketing copy (FAQs, plans, testimonials, etc.)
+│       └── sampleData.js               ← Indian college sample data ⭐ NEW
+│
+├── index.html                 ← SEO meta + Open Graph + JSON-LD schema
+├── tailwind.config.js         ← Brand tokens + bigger font sizes + animations
 ├── vite.config.js
-├── vercel.json              ← Deploy config + security headers
+├── vercel.json                ← Security headers + caching rules
+├── .npmrc                     ← Predictable npm behavior
 └── package.json
 ```
+
+**Why this structure?** The `sections/` folder gives you a 1:1 mapping between site section and file. To reorder the page, just rearrange imports in `App.jsx`. To remove a section, delete its line. To add one, drop a new file in `sections/` and import it.
+
+---
+
+## Page Sections (Top to Bottom)
+
+| # | Section | What it shows |
+|---|---|---|
+| 1 | **Hero** | Massive 4-line headline · Animated dashboard mockup with sample students · 4 inline animated stat counters · 2 floating accent cards |
+| 2 | **LogoMarquee** | Infinite-scrolling row of 12 Indian college names |
+| 3 | **TrustStrip** | 4 trust pillars (multi-tenant, secure, mobile, made for India) |
+| 4 | **LiveStats** | 4 huge animated counters: 12,500+ Students · ₹84+ Cr Fees · 1,840+ Exams · 99.98% Uptime |
+| 5 | **Problem** | 5 pain-point cards + dark "good news" callout |
+| 6 | **Solution** | "Bring it all into one ERP" — large brand image + 5 highlight bullets |
+| 7 | **Features** | 9 module cards with icon, hover lift, gradient corner glow |
+| 8 | **DashboardShowcase** | Interactive **4-tab** live preview: Students table · Fees breakdown · Exam scorecards · Audit log — with realistic Indian sample data |
+| 9 | **HowItWorks** | 3 big numbered steps (in gradient text) |
+| 10 | **ComparisonTable** | 8 side-by-side rows: Excel chaos vs MyCollegeERP clarity |
+| 11 | **Security** | Dark section · 4 security feature cards on a glowing background |
+| 12 | **Pricing** | 3 tiers · Monthly/Annual toggle · "Most Popular" highlight on Pro |
+| 13 | **Testimonials** | Auto-rotating carousel · 5-star rating · Indian college roles |
+| 14 | **FAQ** | 8 expandable questions |
+| 15 | **FinalCTA** | Big "Ready to retire spreadsheets?" + contact card |
+
+---
+
+## Sample Data (in `src/data/sampleData.js`)
+
+All shown live on the page — no Lorem Ipsum:
+
+- **5 sample students** — Aarav Reddy, Priya Sharma, Karthik Naidu, Sneha Lakshmi, Vikram Singh (with VJC2025xxx roll numbers, MPC/BiPC/CEC streams, Paid/Partial/Pending status)
+- **5 fee types** — Tuition (₹45,000), Hostel (₹38,000), Transport, Lab, Exam
+- **5 exam subjects** — Maths, Physics, Chemistry, English, Sanskrit (with grades)
+- **4 audit log entries** — CREATED / UPDATED / EXPORTED / LOGIN with timestamps + IPs
+- **12 college names** — Vinitha JC, Sri Chaitanya, Narayana, Andhra Loyola, Kalams JC, etc.
+
+To swap with your actual data once live, edit just this one file.
 
 ---
 
 ## Where to Place Your Logos
 
-The site **already works** out of the box using SVG placeholders shipped in `public/`. To swap in your high-fidelity PNG logos, just drop these three files into `public/` — that's it. The site automatically prefers the PNG when present and falls back to the SVG when not.
+Drop these into `public/` — components automatically prefer PNG when present:
 
-| File to drop in | Path | Used in |
-|---|---|---|
-| **brand-logo.png** (icon only — graduation cap + M + book) | `public/brand-logo.png` | Header (top-left), Footer, Hero dashboard mockup, Favicon (auto) |
-| **brand-full.png** (icon + "MyCollege ERP" text) | `public/brand-full.png` | Solution section (centered card on left) |
-| **og-image.png** (marketing version with tagline + 5 feature icons) | `public/og-image.png` | Open Graph + Twitter share preview (NOT visible on page) |
+| File | Used in |
+|---|---|
+| `public/brand-logo.png` (icon, ~512×512) | Header · Hero mockup · Footer · Favicon |
+| `public/brand-full.png` (icon + text, ~1024×1024) | Solution section card |
+| `public/og-image.png` (1200×630) | Social share preview (Facebook/Twitter/WhatsApp/LinkedIn) |
 
-### How the swap works
-
-The custom `<Logo>` component (`src/components/Logo.jsx`) tries `/brand-logo.png` first and falls back to `/brand-logo.svg` if the PNG doesn't exist. So:
-
-- ✅ **Drop your PNG** → site uses PNG automatically (no code changes needed)
-- ✅ **No PNG yet** → site uses the styled SVG placeholder (already there)
-- ✅ **Want to keep SVGs forever** → also fine, they scale infinitely & weigh less
-
-### Recommended PNG sizes
-
-- `brand-logo.png` — 512×512px, transparent
-- `brand-full.png` — 1024×1024px, transparent
-- `og-image.png` — 1200×630px (Open Graph standard, opaque background OK)
-
-### Where the logos appear visually
-
-| Section | Logo file | Visual placement |
-|---|---|---|
-| Browser tab favicon | `brand-logo.svg` (auto) → `brand-logo.png` (if uploaded) | Tiny icon in browser tab |
-| Header (top-left) | `brand-logo.*` | Next to "MyCollegeERP" wordmark |
-| Hero dashboard mockup | `brand-logo.*` | Tiny icon next to "Vinitha Junior College" |
-| Solution section (left side) | `brand-full.*` | Large card showcasing the full brand |
-| Footer | `brand-logo.*` | Bottom-left brand block |
-| Social share preview | `og-image.png` | Auto-pulled by Facebook/Twitter/WhatsApp/LinkedIn when sharing the URL |
+Site already renders perfectly with the SVG placeholders shipped in `public/` — drop PNGs in to upgrade.
 
 ---
 
 ## Local Development
 
-Prerequisites: **Node.js 18+** and **npm**.
-
 ```bash
-# 1. Install dependencies
+# Get fresh deps (important if you previously had vite 8 installed)
+rm -rf node_modules package-lock.json
 npm install
 
-# 2. Start dev server (auto-opens http://localhost:5173)
+# Start dev server (auto-opens http://localhost:5173)
 npm run dev
 
-# 3. Build for production
+# Production build
 npm run build
 
-# 4. Preview the production build locally
+# Preview production locally
 npm run preview
 ```
+
+> **If you see a "Cannot find package esbuild" error on local build:** your `node_modules` has the old Vite 8 installed but the package.json now pins Vite 7. Run the reinstall above.
 
 ---
 
 ## Deploying
 
-### Option A — Vercel (recommended, 2 minutes)
-
-1. Push this repo to GitHub: `https://github.com/infyskillclientwebsites/MyCollegeERP-Static-Site`
-2. Go to [vercel.com/new](https://vercel.com/new) → Import this repo
-3. Vercel auto-detects Vite. Click **Deploy**.
-4. Add custom domain `infycollegeerp.com` in Vercel → Project → Settings → Domains
-5. Update DNS at your registrar to point to Vercel (Vercel shows the exact records)
-
-### Option B — Netlify
+### Vercel (recommended)
 
 ```bash
-# Build and drag the `dist/` folder onto netlify.com/drop
-npm run build
+git add .
+git commit -m "v2: bigger fonts, animated counters, dashboard showcase, comparison table"
+git push
 ```
 
-### Option C — Cloudflare Pages
-
-```bash
-# Connect repo at pages.cloudflare.com
-# Build command: npm run build
-# Output directory: dist
-```
-
-### Option D — Any static host (S3, Hostinger, GitHub Pages)
-
-```bash
-npm run build
-# Upload contents of `dist/` to your static host
-```
+Vercel auto-deploys on push. Custom domain config: Vercel → Project → Settings → Domains → add `infycollegeerp.com`.
 
 ---
 
 ## Editing Content
 
-All marketing copy lives in **`src/data/content.js`**. To change:
-
-- **Phone, email, WhatsApp number** → edit `CONTACT` object
-- **Feature descriptions** → edit `FEATURES` array
-- **FAQ questions** → edit `FAQS` array
-- **Pricing plan features** → edit `PLANS` array
-- **Testimonials** → edit `TESTIMONIALS` array (replace with real customer quotes once available)
-
-Headline/hero copy lives in `src/components/Hero.jsx` (intentionally — it's the primary brand promise).
+| What | Where |
+|---|---|
+| Hero headline | `src/components/sections/Hero.jsx` |
+| Marketing copy (FAQs, pricing features, testimonials) | `src/data/content.js` |
+| Sample students/fees/exams shown in dashboard | `src/data/sampleData.js` |
+| Brand colors / fonts | `tailwind.config.js` |
+| Page section order | `src/App.jsx` |
+| SEO meta tags | `index.html` |
+| Contact info (email, phone, WhatsApp) | `src/data/content.js` → `CONTACT` |
 
 ---
 
-## Theme Tokens
+## Customization Recipes
 
-Defined in `tailwind.config.js`:
+### Add a new section
+1. Create `src/components/sections/MySection.jsx`:
+   ```jsx
+   import ScrollReveal from '../ui/ScrollReveal.jsx';
+   export default function MySection() {
+     return (
+       <section className="section bg-white">
+         <div className="container-page">
+           <ScrollReveal variant="up">
+             <h2 className="heading-section">Hello world</h2>
+           </ScrollReveal>
+         </div>
+       </section>
+     );
+   }
+   ```
+2. Import + render it in `src/App.jsx` where you want it on the page.
+
+### Add an animated counter anywhere
+```jsx
+import Counter from './components/ui/Counter.jsx';
+<Counter end={1234} prefix="₹" suffix="+" />
+```
+
+### Wrap any element in scroll fade-in
+```jsx
+import ScrollReveal from './components/ui/ScrollReveal.jsx';
+<ScrollReveal variant="up" delay={150}>
+  <div>...</div>
+</ScrollReveal>
+```
+
+---
+
+## Theme Tokens (`tailwind.config.js`)
 
 ```js
 navy:        #0f172a   // primary dark, headings, footer
@@ -182,49 +250,38 @@ brand.amber: #fbbf24   // warnings, highlights
 brand.bg:    #f6f7f9   // soft page background
 ```
 
-Fonts:
-- **Playfair Display** — headings (premium, editorial feel)
-- **DM Sans** — UI / body (clean, modern)
+Custom utility classes:
+- `.heading-hero` — fluid 2.75–6.75rem with negative letter-spacing
+- `.heading-section` — fluid 2.25–3.75rem
+- `.heading-card` — fluid 1.5–2rem
+- `.lead` / `.lead-lg` — fluid body text
+- `.text-gradient` — animated blue→teal→blue gradient text
+- `.section-tag` — pill-style section labels
+- `.btn-accent`, `.btn-primary`, `.btn-outline`, `.btn-whatsapp` — buttons
+- `.grid-bg`, `.dot-bg` — background patterns
 
 ---
 
 ## SEO Checklist
 
 ✅ Title + description + keywords in `index.html`
-✅ Open Graph tags (title, description, image)
-✅ Twitter Card meta
+✅ Open Graph + Twitter card meta
 ✅ JSON-LD structured data (`SoftwareApplication`)
 ✅ Canonical URL
-✅ Semantic HTML (single H1, proper heading hierarchy)
-✅ Mobile-responsive viewport tag
-✅ Theme color for browser chrome
-
-After deploy:
-- Submit sitemap to [Google Search Console](https://search.google.com/search-console)
-- Verify ownership via DNS or HTML tag
-- Test OG preview with [opengraph.xyz](https://www.opengraph.xyz)
+✅ `robots.txt` + `sitemap.xml`
+✅ Single H1, semantic heading hierarchy
+✅ Mobile viewport, theme-color
+✅ Preloaded Google Fonts
 
 ---
 
 ## Security
 
-- **Static build** — no backend, no database, no PII processed client-side
-- **Security headers** in `vercel.json`: HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy
-- **No tracking by default** — add Plausible/Umami if needed (privacy-respecting)
-- **Forms** route to `mailto:` and `wa.me/` — no third-party form handlers required
-- **Dependencies** — only `react`, `react-dom`, `lucide-react` in production (audited regularly)
-
----
-
-## Roadmap (post-launch ideas)
-
-- [ ] Add `/blog` route with MDX posts
-- [ ] Add demo-request form with Supabase storage (instead of mailto)
-- [ ] Add `/case-studies` for college success stories
-- [ ] Add Telugu language toggle (i18next)
-- [ ] Add live chat (Crisp / Intercom)
-- [ ] Replace placeholder testimonials with real customer logos + quotes
-- [ ] Add Plausible analytics (privacy-friendly)
+- Static build — zero server attack surface
+- Security headers in `vercel.json` (HSTS, X-Frame-Options, Permissions-Policy, Referrer-Policy)
+- `prefers-reduced-motion` honored automatically
+- No third-party tracking by default
+- Forms use `mailto:` and `wa.me/` — no third-party form handlers needed
 
 ---
 

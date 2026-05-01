@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Menu, X, LogIn } from 'lucide-react';
-import { CONTACT, NAV_LINKS } from '../data/content.js';
-import Logo from './Logo.jsx';
+import { Menu, X, LogIn, ArrowRight } from 'lucide-react';
+import { CONTACT, NAV_LINKS } from '../../data/content.js';
+import Logo from '../Logo.jsx';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -16,24 +16,24 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full backdrop-blur transition-all ${
+      className={`sticky top-0 z-50 w-full backdrop-blur-md transition-all duration-300 ${
         scrolled
           ? 'bg-white/85 border-b border-navy-100 shadow-sm'
           : 'bg-white/60'
       }`}
     >
-      <div className="container-page flex h-16 items-center justify-between gap-4">
-        <a href="#home" className="flex items-center gap-2.5">
+      <div className="container-page flex h-20 items-center justify-between gap-4 py-3">
+        <a href="#home" className="flex items-center gap-3">
           <Logo
             name="brand-logo"
             alt="MyCollegeERP"
-            className="h-9 w-9 rounded-md object-contain"
+            className="h-14 w-14 rounded-lg object-contain sm:h-16 sm:w-16"
           />
           <div className="flex flex-col leading-none">
-            <span className="font-display text-lg font-bold text-navy-900">
+            <span className="font-display text-2xl font-bold text-navy-900 sm:text-[26px]">
               MyCollege<span className="text-brand-teal">ERP</span>
             </span>
-            <span className="hidden text-[10px] font-medium uppercase tracking-wider text-navy-500 sm:block">
+            <span className="hidden text-[11px] font-bold uppercase tracking-[0.18em] text-navy-500 sm:block">
               Admission to Alumni
             </span>
           </div>
@@ -44,7 +44,7 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-navy-700 transition hover:bg-navy-100 hover:text-navy-900"
+              className="rounded-lg px-4 py-2 text-sm font-bold text-navy-700 transition hover:bg-navy-100 hover:text-navy-900"
             >
               {link.label}
             </a>
@@ -56,13 +56,17 @@ export default function Header() {
             href={CONTACT.appUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-ghost"
+            className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-bold text-navy-700 transition hover:bg-navy-100"
           >
             <LogIn className="h-4 w-4" />
             Sign in
           </a>
-          <a href={CONTACT.demoMailto} className="btn-accent">
+          <a
+            href={CONTACT.demoMailto}
+            className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-brand-blue to-blue-700 px-5 py-2.5 text-sm font-bold text-white shadow-glow transition hover:-translate-y-0.5 hover:shadow-card-hover"
+          >
             Request Demo
+            <ArrowRight className="h-4 w-4" />
           </a>
         </div>
 
@@ -84,12 +88,12 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-navy-700 hover:bg-navy-100"
+                className="rounded-lg px-3 py-3 text-base font-bold text-navy-700 hover:bg-navy-100"
               >
                 {link.label}
               </a>
             ))}
-            <div className="mt-2 flex flex-col gap-2 border-t border-navy-100 pt-3">
+            <div className="mt-3 flex flex-col gap-2 border-t border-navy-100 pt-3">
               <a
                 href={CONTACT.appUrl}
                 target="_blank"
@@ -101,6 +105,7 @@ export default function Header() {
               </a>
               <a href={CONTACT.demoMailto} className="btn-accent">
                 Request Demo
+                <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </nav>

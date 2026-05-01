@@ -25,10 +25,14 @@ export const CONTACT = {
   whatsappUrl: 'https://wa.me/919080087187',
   appUrl: 'https://app.infycollegeerp.com/auth',
   marketingUrl: 'https://infycollegeerp.com',
+  parentSite: 'https://infyskill.in',
+  parentName: 'Infyskill.in',
   location: 'Andhra Pradesh, India',
   supportHours: 'Mon–Sat, 9 AM – 6 PM IST',
   demoMailto:
     'mailto:infyclgerp@gmail.com?subject=MyCollegeERP%20Demo%20Request&body=Hello%2C%20I%27d%20like%20to%20book%20a%20free%20demo%20for%20my%20college.%0A%0ACollege%20Name%3A%20%0AStudent%20Strength%3A%20%0AContact%20Person%3A%20%0APhone%3A%20%0A%0AThank%20you.',
+  pricingMailto:
+    'mailto:infyclgerp@gmail.com?subject=MyCollegeERP%20Pricing%20Quote&body=Hello%2C%20I%27d%20like%20a%20pricing%20quote%20for%20my%20college.%0A%0ACollege%20Name%3A%20%0AStudent%20Strength%3A%20%0AModules%20needed%3A%20%0AContact%20Person%3A%20%0APhone%3A%20%0A%0AThank%20you.',
 };
 
 export const NAV_LINKS = [
@@ -214,54 +218,90 @@ export const SECURITY = [
   },
 ];
 
+/**
+ * Per-student / per-month billing model.
+ * Pricing is intentionally non-frozen during the founding phase —
+ * we tailor it based on student strength, modules selected, and term length.
+ *
+ * Each plan includes a FREE college website (static or dynamic) — see
+ * WEBSITE_BONUS below for the full inclusion + cancellation policy.
+ */
 export const PLANS = [
   {
-    name: 'Basic',
-    tagline: 'For small colleges starting digital',
-    price: 'Contact for pricing',
-    cta: 'Request quote',
+    name: 'Starter',
+    tagline: 'For small colleges going digital',
+    studentBand: 'Up to 200 students',
+    priceLabel: 'Custom quote',
+    priceSub: 'Per-student / month · Talk to us',
+    cta: 'Request a quote',
     highlighted: false,
+    websiteIncluded: 'FREE static college website',
     features: [
-      'Up to 200 students',
-      'Admissions, Fees, Exams modules',
-      'PDF receipts and scorecards',
-      'Email support',
-      '5 admin users',
+      'Admissions + Students module',
+      'Fee Management with PDF receipts',
+      'Exams & Scorecards',
       'CSV exports',
+      'Email support (1 business hour)',
+      '3 admin users',
+      'Founding member pricing',
     ],
   },
   {
-    name: 'Pro',
+    name: 'Growth',
     badge: 'Most Popular',
-    tagline: 'For growing institutions',
-    price: 'Contact for pricing',
-    cta: 'Start with Pro',
+    tagline: 'For growing junior & intermediate colleges',
+    studentBand: '200 – 1,000 students',
+    priceLabel: 'Custom quote',
+    priceSub: 'Per-student / month · Volume discount',
+    cta: 'Talk to founder',
     highlighted: true,
+    websiteIncluded: 'FREE dynamic college website',
     features: [
-      'Up to 1,000 students',
-      'Everything in Basic',
+      'Everything in Starter',
       'Hostel + Payroll + Expenses',
-      'Custom fields',
-      'Priority WhatsApp support',
+      'Alumni Network module',
+      'Custom fields (no-code)',
+      'WhatsApp + phone support',
       'Unlimited admin users',
+      'Priority feature requests',
     ],
   },
   {
-    name: 'Enterprise',
-    tagline: 'For multi-campus groups',
-    price: 'Custom pricing',
-    cta: 'Contact sales',
+    name: 'Campus',
+    tagline: 'For multi-campus groups & networks',
+    studentBand: '1,000+ students',
+    priceLabel: 'Custom pricing',
+    priceSub: 'Annual contract · Volume tier',
+    cta: 'Book strategy call',
     highlighted: false,
+    websiteIncluded: 'FREE dynamic college website',
     features: [
-      'Unlimited students',
       'Multi-college dashboard',
-      'Dedicated account manager',
-      'Custom integrations',
+      'Dedicated success manager',
       'White-labeled receipts/payslips',
-      'Priority support',
+      'Custom integrations & API',
+      'On-site training (1 day)',
+      'SLA-backed uptime',
+      'Quarterly business reviews',
     ],
   },
 ];
+
+/**
+ * Free college website bundled with every plan, with a 1-year cancellation
+ * clause — short bullets shown on the pricing page.
+ */
+export const WEBSITE_BONUS = {
+  title: '🎁 Free college website included with every plan',
+  bullets: [
+    'Starter plan → free static college website',
+    'Growth & Campus plans → free dynamic college website',
+    'Hosted, mobile-responsive, branded with your college identity',
+    'Domain setup assistance + 1 year of free hosting',
+  ],
+  clause:
+    'If you cancel your MyCollegeERP subscription within the first 12 months, the website development charges become payable as a one-time fee.',
+};
 
 export const TESTIMONIALS = [
   {
