@@ -16,20 +16,22 @@ export default function Footer() {
     <footer className="relative overflow-hidden bg-navy-900 text-navy-200">
       <div className="accent-strip" />
 
-      {/* Brand watermark — huge "MyCollegeERP" rendered in display font as a
-          subtle shade behind all content. Uses fluid font-size so it scales
-          responsively from phone to ultrawide. Sits below content via z-0
-          while the rest of the footer carries z-10. */}
+      {/* Brand watermark — huge "MyCollegeERP" centered inside the footer
+          as a subtle shade behind all content. Sized so the entire word fits
+          within the footer height on every breakpoint (no translateY, no
+          clipping at top or bottom). Opacity baked into the gradient stops
+          so bg-clip-text renders correctly without a separate opacity
+          property fighting the gradient. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex select-none items-end justify-center"
+        className="pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center"
       >
         <span
-          className="block whitespace-nowrap bg-gradient-to-r from-white via-brand-teal to-brand-blue bg-clip-text text-center font-display font-extrabold leading-[0.85] tracking-tighter text-transparent"
+          className="block whitespace-nowrap bg-clip-text text-center font-display font-extrabold leading-none tracking-tight text-transparent"
           style={{
-            fontSize: 'clamp(4rem, 19vw, 17rem)',
-            opacity: 0.07,
-            transform: 'translateY(18%)',
+            fontSize: 'clamp(3rem, 14vw, 12rem)',
+            backgroundImage:
+              'linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(20,184,166,0.09) 45%, rgba(37,99,235,0.07) 100%)',
           }}
         >
           MyCollegeERP
