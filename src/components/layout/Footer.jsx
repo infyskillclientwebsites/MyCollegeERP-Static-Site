@@ -13,9 +13,30 @@ function openLegal(name) {
 
 export default function Footer() {
   return (
-    <footer className="relative bg-navy-900 text-navy-200">
+    <footer className="relative overflow-hidden bg-navy-900 text-navy-200">
       <div className="accent-strip" />
-      <div className="container-page py-16">
+
+      {/* Brand watermark — huge "MyCollegeERP" rendered in display font as a
+          subtle shade behind all content. Uses fluid font-size so it scales
+          responsively from phone to ultrawide. Sits below content via z-0
+          while the rest of the footer carries z-10. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex select-none items-end justify-center"
+      >
+        <span
+          className="block whitespace-nowrap bg-gradient-to-r from-white via-brand-teal to-brand-blue bg-clip-text text-center font-display font-extrabold leading-[0.85] tracking-tighter text-transparent"
+          style={{
+            fontSize: 'clamp(4rem, 19vw, 17rem)',
+            opacity: 0.07,
+            transform: 'translateY(18%)',
+          }}
+        >
+          MyCollegeERP
+        </span>
+      </div>
+
+      <div className="container-page relative z-10 py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3">
