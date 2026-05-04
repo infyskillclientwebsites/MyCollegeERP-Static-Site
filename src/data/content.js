@@ -303,13 +303,35 @@ export const WEBSITE_BONUS = {
     'If you cancel your MyCollegeERP subscription within the first 12 months, the website development charges become payable as a one-time fee.',
 };
 
+/**
+ * Founding-customer spotlight. The first real college running on
+ * MyCollegeERP — strongest possible social signal during the early phase.
+ */
+export const CUSTOMER_SPOTLIGHT = {
+  badge: 'Our Founding Customer',
+  collegeName: "Shiv Chhatrapati Vizag-Kalam's Junior College",
+  shortName: "Vizag Kalam's Junior College",
+  location: 'Visakhapatnam, Andhra Pradesh',
+  website: 'https://vizagkalams.com',
+  websiteDisplay: 'vizagkalams.com',
+  initials: 'VK',
+  description:
+    "Vizag Kalam's is the first college live on MyCollegeERP — managing admissions, fees, exams and student records every day through our platform. Their feedback shapes every release.",
+  highlights: [
+    'Managing 200+ students daily through MyCollegeERP',
+    'Live since founding-phase launch in 2025',
+    'Direct line to founder for feature requests',
+  ],
+};
+
 export const TESTIMONIALS = [
   {
     quote:
-      'We moved from Excel sheets to MyCollegeERP and saved 15 hours a week on fee reconciliation. The audit log gave our trustees the transparency they wanted.',
-    name: 'Principal',
-    role: 'Junior College, Andhra Pradesh',
-    initials: 'JC',
+      "We were the first college to go live on MyCollegeERP. The team listens, ships fast, and the platform has genuinely simplified our daily admissions and fee work.",
+    name: "Vizag Kalam's Junior College",
+    role: 'Founding Customer · Visakhapatnam, AP',
+    website: 'https://vizagkalams.com',
+    initials: 'VK',
   },
   {
     quote:

@@ -9,6 +9,7 @@ import TrustStrip from './components/sections/TrustStrip.jsx';
 import LiveStats from './components/sections/LiveStats.jsx';
 import Problem from './components/sections/Problem.jsx';
 import Solution from './components/sections/Solution.jsx';
+import CustomerSpotlight from './components/sections/CustomerSpotlight.jsx';
 import Features from './components/sections/Features.jsx';
 import DashboardShowcase from './components/sections/DashboardShowcase.jsx';
 import HowItWorks from './components/sections/HowItWorks.jsx';
@@ -52,6 +53,7 @@ export default function App() {
         <LiveStats />
         <Problem />
         <Solution />
+        <CustomerSpotlight />
         <Features />
         <DashboardShowcase />
         <HowItWorks />

@@ -62,12 +62,25 @@ export default function Testimonials() {
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-teal font-display text-lg font-bold text-white shadow-glow">
                     {TESTIMONIALS[active].initials}
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <div className="text-base font-bold text-navy-900 sm:text-lg">
                       {TESTIMONIALS[active].name}
                     </div>
-                    <div className="text-sm text-navy-500">
-                      {TESTIMONIALS[active].role}
+                    <div className="flex flex-wrap items-center gap-2 text-sm text-navy-500">
+                      <span>{TESTIMONIALS[active].role}</span>
+                      {TESTIMONIALS[active].website && (
+                        <a
+                          href={TESTIMONIALS[active].website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 font-semibold text-brand-blue transition hover:text-blue-700"
+                        >
+                          ·{' '}
+                          {TESTIMONIALS[active].website
+                            .replace(/^https?:\/\//, '')
+                            .replace(/\/$/, '')}
+                        </a>
+                      )}
                     </div>
                   </div>
                 </figcaption>
