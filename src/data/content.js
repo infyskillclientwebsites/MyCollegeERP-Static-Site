@@ -319,7 +319,7 @@ export const CUSTOMER_SPOTLIGHT = {
     "Vizag Kalam's is the first college live on MyCollegeERP — managing admissions, fees, exams and student records every day through our platform. Their feedback shapes every release.",
   highlights: [
     'Managing 200+ students daily through MyCollegeERP',
-    'Live since founding-phase launch in 2025',
+    'Live since founding-phase launch in 2026',
     'Direct line to founder for feature requests',
   ],
 };
